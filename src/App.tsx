@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Shift from './Shift';
 
 const App: React.FC = () => {
-  const [shifts, setShifts] = useState<Shift[]>([]);
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
 
   const handleDateClick = (date: Date | null) => {
