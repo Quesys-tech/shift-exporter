@@ -25,7 +25,6 @@ jobs:
           reporter: github-pr-review
           eslint_flags: "src/"
   stylelint:
-    name: runner / stylelint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
