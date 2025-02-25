@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+
+  const handleDateClick = (date: Date | null) => {
+    if (!date) return;
+
+    const dateExists = selectedDates.some(
+      (selectedDate) => selectedDate.getTime() === date.getTime()
+    );
+
+    if (dateExists) {
+      setSelectedDates(selectedDates.filter(
+        (selectedDate) => selectedDate.getTime() !== date.getTime()
+      ));
+    } else {
+      setSelectedDates([...selectedDates, date]);
+    }
+  };
 
   return (
-    <>
+    <div>
+      <DatePicker
+        inline
+        selected={null}
+        onChange={handleDateClick}
+        highlightDates={selectedDates}
+        dayClassName={(date) =>
+          selectedDates.some(
+            (selectedDate) => selectedDate.getTime() === date.getTime()
+          )
+            ? 'selected-date'
+            : ''
+        }
+      />
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h3>選択された日付:</h3>
+        <ul>
+          {selectedDates.map((date) => (
+            <li key={date.toISOString()}>{date.toLocaleDateString()}</li>
+          ))}
+        </ul>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
