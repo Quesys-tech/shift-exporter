@@ -20,6 +20,10 @@ const App: React.FC = () => {
       setSelectedDates([...selectedDates, date]);
     }
   };
+  const resetSelectedDates = () => {
+    setSelectedDates([]);
+  };
+  const sortedDates = selectedDates.sort((a, b) => a.getTime() - b.getTime());
 
   return (
     <div>
@@ -39,10 +43,11 @@ const App: React.FC = () => {
       <div>
         <h3>選択された日付:</h3>
         <ul>
-          {selectedDates.map((date) => (
+          {sortedDates.map((date) => (
             <li key={date.toISOString()}>{date.toLocaleDateString()}</li>
           ))}
         </ul>
+        <button onClick={resetSelectedDates}>リセット</button>
       </div>
     </div>
   );
