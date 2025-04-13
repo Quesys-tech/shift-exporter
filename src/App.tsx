@@ -108,7 +108,13 @@ const App: React.FC = () => {
           const csv = generateCsv(subject, startTime, endTime, sortedDates);
           downloadCsv(csv, 'shifts' + subject + '.csv');
         }}
-      >ダウンロード</button>)}
+      >ダウンロード</button>
+        </div>
+      )}
+      <footer>
+        <p>Shift calendar exporter by <a href="https://github.com/Quesys-tech">Queue-sys</a></p>
+        <p><a href="https://github.com/Quesys-tech/shift-exporter">Repository</a></p>
+      </footer>
     </div>
   );
 };
