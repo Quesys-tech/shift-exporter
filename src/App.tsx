@@ -70,6 +70,9 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <h1>
+        Shift calendar exporter
+      </h1>
       <label>
         件名:
         <input
