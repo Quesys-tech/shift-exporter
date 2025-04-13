@@ -19,6 +19,21 @@ const downloadCsv = (csv: string, filename: string) => {
   link.click();
   document.body.removeChild(link);
 }
+const getDuration = (startTime: string, endTime: string) => {
+  const start = new Date(`1970-01-01T${startTime}:00`);
+  const end = new Date(`1970-01-01T${endTime}:00`);
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    return 'Error: 時間の形式が正しくありません';
+  }
+  const duration = (end.getTime() - start.getTime()) / (1000 * 60);
+  if (duration < 0) {
+    return 'Error: 終了時間が開始時間より早いです';
+  } else if (duration == 0) {
+    return 'Error: 終了時間と開始時間が同じです';
+  } else {
+    return `${Math.floor(duration / 60)}時間 ${duration % 60}分`;
+  }
+}
 
 const App: React.FC = () => {
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
@@ -79,6 +94,9 @@ const App: React.FC = () => {
           onChange={handleEndTimeChange}
         />
       </label>
+      <p>
+        継続時間: {getDuration(startTime, endTime)}
+      </p>
       <h2>日付を選択してください:</h2>
       <DatePicker
         inline
