@@ -19,6 +19,21 @@ const downloadCsv = (csv: string, filename: string) => {
   link.click();
   document.body.removeChild(link);
 }
+const getDuration = (startTime: string, endTime: string) => {
+  const start = new Date(`1970-01-01T${startTime}:00`);
+  const end = new Date(`1970-01-01T${endTime}:00`);
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    return 'Error: 時間の形式が正しくありません';
+  }
+  const duration = (end.getTime() - start.getTime()) / (1000 * 60);
+  if (duration < 0) {
+    return 'Error: 終了時間が開始時間より早いです';
+  } else if (duration == 0) {
+    return 'Error: 終了時間と開始時間が同じです';
+  } else {
+    return `${Math.floor(duration / 60)}時間 ${duration % 60}分`;
+  }
+}
 
 const App: React.FC = () => {
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
@@ -55,6 +70,9 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <h1>
+        Shift calendar exporter
+      </h1>
       <label>
         件名:
         <input
@@ -79,6 +97,9 @@ const App: React.FC = () => {
           onChange={handleEndTimeChange}
         />
       </label>
+      <p>
+        継続時間: {getDuration(startTime, endTime)}
+      </p>
       <h2>日付を選択してください:</h2>
       <DatePicker
         inline
@@ -103,12 +124,20 @@ const App: React.FC = () => {
         </ul>
         <button onClick={resetSelectedDates}>リセット</button>
       </div>
-      {selectedDates.length > 0 && (<button
-        onClick={() => {
-          const csv = generateCsv(subject, startTime, endTime, sortedDates);
-          downloadCsv(csv, 'shifts' + subject + '.csv');
-        }}
-      >ダウンロード</button>)}
+      {selectedDates.length > 0 && (
+        <div>
+          <button
+            onClick={() => {
+              const csv = generateCsv(subject, startTime, endTime, sortedDates);
+              downloadCsv(csv, 'shifts' + subject + '.csv');
+            }}
+          >CSV形式でダウンロード</button>
+        </div>
+      )}
+      <footer>
+        <p>Shift calendar exporter by <a href="https://github.com/Quesys-tech">Queue-sys</a></p>
+        <p><a href="https://github.com/Quesys-tech/shift-exporter">Repository</a></p>
+      </footer>
     </div>
   );
 };
