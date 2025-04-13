@@ -103,12 +103,14 @@ const App: React.FC = () => {
         </ul>
         <button onClick={resetSelectedDates}>リセット</button>
       </div>
-      {selectedDates.length > 0 && (<button
-        onClick={() => {
-          const csv = generateCsv(subject, startTime, endTime, sortedDates);
-          downloadCsv(csv, 'shifts' + subject + '.csv');
-        }}
-      >ダウンロード</button>
+      {selectedDates.length > 0 && (
+        <div>
+          <button
+            onClick={() => {
+              const csv = generateCsv(subject, startTime, endTime, sortedDates);
+              downloadCsv(csv, 'shifts' + subject + '.csv');
+            }}
+          >CSV形式でダウンロード</button>
         </div>
       )}
       <footer>
