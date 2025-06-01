@@ -62,8 +62,8 @@ const App: React.FC = () => {
   const sortedDates = selectedDates.sort((a, b) => a.getTime() - b.getTime());
 
   return (
-    <div>
-      <h1>
+    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+      <h1 style={{ textAlign: 'center' }}>
         Shift calendar exporter
       </h1>
       <label>
