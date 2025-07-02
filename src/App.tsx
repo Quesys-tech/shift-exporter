@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { generateCsv } from './Csv';
+import { downloadCsv } from './Csv';
 
-const downloadCsv = (csv: string, filename: string) => {
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.setAttribute('download', filename);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
+
 const getDuration = (startTime: string, endTime: string) => {
   const start = new Date(`1970-01-01T${startTime}:00`);
   const end = new Date(`1970-01-01T${endTime}:00`);
@@ -120,10 +112,8 @@ const App: React.FC = () => {
       {selectedDates.length > 0 && (
         <div>
           <button
-            onClick={() => {
-              const csv = generateCsv(subject, startTime, endTime, sortedDates);
-              downloadCsv(csv, 'shifts' + subject + '.csv');
-            }}
+            onClick={() => downloadCsv(subject, startTime, endTime, sortedDates, 'shifts_' + subject + '.csv')
+            }
           >CSV形式でダウンロード</button>
         </div>
       )}
