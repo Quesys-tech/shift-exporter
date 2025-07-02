@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { downloadCsv } from './Csv';
+import { downloadIcs } from './Ics';
 
 
 const getDuration = (startTime: string, endTime: string) => {
@@ -115,6 +116,10 @@ const App: React.FC = () => {
             onClick={() => downloadCsv(subject, startTime, endTime, sortedDates, 'shifts_' + subject + '.csv')
             }
           >CSV形式でダウンロード</button>
+          <button
+            onClick={() => downloadIcs(subject, startTime, endTime, sortedDates, 'shifts_' + subject + '.ics')
+            }
+          >ICS形式でダウンロード</button>
         </div>
       )}
       <footer>
