@@ -8,7 +8,7 @@ const escapeCsv = (str: string) => {
     return str;
 }
 
-const generateCsv = (subject: string, startTime: string, endTime: string, dates: Date[]) => {
+export const generateCsv = (subject: string, startTime: string, endTime: string, dates: Date[]) => {
     const subject_escaped = escapeCsv(subject);
     const header = 'Subject,Start Date,Start Time,End Date,End Time\n';
     const rows = dates.map((date) => {
