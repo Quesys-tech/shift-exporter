@@ -31,7 +31,7 @@ const generateIcsString = (subject: string, startTime: string, endTime: string, 
             location: '',
             uid: `${subject}-${date.toISOString()}`,
         };
-        return event
+        return event;
     });
 
     return generateIcsCalendar({
