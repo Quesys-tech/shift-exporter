@@ -1,38 +1,36 @@
-import { generateIcsCalendar,generateIcsEvent, type IcsCalendar,type IcsEvent,type IcsDateObject, generateIcsDate } from "ts-ics";
+import { generateIcsCalendar, type IcsEvent, type IcsDateObject } from "ts-ics";
 
 const generateIcsString = (subject: string, startTime: string, endTime: string, dates: Date[]): string => {
-    const startTimeHours : number = parseInt(startTime.split(':')[0]);
-    const startTimeMinutes : number = parseInt(startTime.split(':')[1]);
-    const endTimeHours : number = parseInt(endTime.split(':')[0]);
-    const endTimeMinutes : number = parseInt(endTime.split(':')[1]);
+    const startTimeHours: number = parseInt(startTime.split(':')[0]);
+    const startTimeMinutes: number = parseInt(startTime.split(':')[1]);
+    const endTimeHours: number = parseInt(endTime.split(':')[0]);
+    const endTimeMinutes: number = parseInt(endTime.split(':')[1]);
 
     const events: IcsEvent[] = dates.map(date => {
         const year = date.getFullYear();
-        const month = date.getMonth();      
+        const month = date.getMonth();
         const day = date.getDate();
 
-        const startDate = new Date(year,month,day,startTimeHours,startTimeMinutes,0);
+        const startDate = new Date(year, month, day, startTimeHours, startTimeMinutes, 0);
+        const endDate = new Date(year, month, day, endTimeHours, endTimeMinutes, 0);
 
-        const endDate = new  Date(year,month,day,endTimeHours,endTimeMinutes,0);
- 
-         const event: IcsEvent = generateIcsEvent({
-            start: startDate,
-            end: endDate,
+        const event: IcsEvent = {
+            start: { date: startDate } as IcsDateObject,
+            end: { date: endDate } as IcsDateObject,
+            stamp: { date: new Date() } as IcsDateObject,
             summary: subject,
             description: subject,
             location: '',
             uid: `${subject}-${date.toISOString()}`,
-        });
+        };
         return event
     });
 
-    const calendar: IcsCalendar = generateIcsCalendar({
+    return generateIcsCalendar({
         events,
         prodId: '-//Quesys Tech//Shift Exporter//EN',
         version: '2.0',
     });
-
-    return calendar.toString();
 }
 
 export const downloadIcs = (subject: string, startTime: string, endTime: string, dates: Date[], filename: string) => {
