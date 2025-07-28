@@ -1,3 +1,5 @@
+import filenamify from "filenamify";
+
 const escapeCsv = (str: string) => {
     if (str.includes('"')) {
         str = str.replace(/"/g, '""');
@@ -16,4 +18,15 @@ export const generateCsv = (subject: string, startTime: string, endTime: string,
         return `${subject_escaped},${formattedDate},${startTime},${formattedDate},${endTime}`;
     });
     return header + rows.join('\n');
+}
+
+export const downloadCsv = (subject: string, startTime: string, endTime: string, dates: Date[], filename: string) => {
+    const csv = generateCsv(subject, startTime, endTime, dates);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', filenamify(filename));
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
