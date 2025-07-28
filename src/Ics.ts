@@ -1,3 +1,4 @@
+import filenamify from "filenamify";
 import { generateIcsCalendar, type IcsEvent, type IcsDateObject } from "ts-ics";
 
 const generateIcsString = (subject: string, startTime: string, endTime: string, dates: Date[]): string => {
@@ -46,7 +47,7 @@ export const downloadIcs = (subject: string, startTime: string, endTime: string,
     const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.setAttribute('download', filename);
+    link.setAttribute('download', filenamify(filename));
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

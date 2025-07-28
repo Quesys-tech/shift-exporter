@@ -1,3 +1,5 @@
+import filenamify from "filenamify";
+
 const escapeCsv = (str: string) => {
     if (str.includes('"')) {
         str = str.replace(/"/g, '""');
@@ -23,7 +25,7 @@ export const downloadCsv = (subject: string, startTime: string, endTime: string,
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.setAttribute('download', filename);
+    link.setAttribute('download', filenamify(filename));
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
