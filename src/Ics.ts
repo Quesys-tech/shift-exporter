@@ -13,17 +13,15 @@ const generateIcsString = (subject: string, startTime: string, endTime: string, 
         const day = date.getDate();
 
         const startDate = new Date(year, month, day, startTimeHours, startTimeMinutes, 0);
-        const startDateUtc = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000);
         const endDate = new Date(year, month, day, endTimeHours, endTimeMinutes, 0);
-        const endDateUtc = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000);
 
         const event: IcsEvent = {
             start: {
-                date: startDateUtc,
+                date: startDate,
                 type: 'DATE-TIME'
             } as IcsDateObject,
             end: {
-                date: endDateUtc,
+                date: endDate,
                 type: 'DATE-TIME'
             } as IcsDateObject,
             stamp: { date: new Date() } as IcsDateObject,
