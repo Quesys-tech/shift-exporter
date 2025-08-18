@@ -15,8 +15,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1
       react-datepicker:
-        specifier: ^8.4.0
-        version: 8.4.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^8.5.0
+        version: 8.5.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
@@ -2009,8 +2009,8 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  react-datepicker@8.4.0:
-    resolution: {integrity: sha512-6nPDnj8vektWCIOy9ArS3avus9Ndsyz5XgFCJ7nBxXASSpBdSL6lG9jzNNmViPOAOPh6T5oJyGaXuMirBLECag==}
+  react-datepicker@8.5.0:
+    resolution: {integrity: sha512-GdKElMgEBgyAv2L5QjwvlStdZU8Nz76roBZ2rkpxFx8eIJ0SAHaAGckG8+FSi00EQnzKqA2N9qA61oxll8CyhA==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18 || ^19 || ^19.0.0-rc
       react-dom: ^16.9.0 || ^17 || ^18 || ^19 || ^19.0.0-rc
@@ -4498,7 +4498,7 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  react-datepicker@8.4.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  react-datepicker@8.5.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       '@floating-ui/react': 0.27.15(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       clsx: 2.1.1
