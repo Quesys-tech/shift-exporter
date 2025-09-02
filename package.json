@@ -11,8 +11,10 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "filenamify": "^6.0.0",
     "react": "^19.1.1",
+    "react-bootstrap": "^2.10.10",
     "react-datepicker": "^8.7.0",
     "react-dom": "^19.1.1",
     "ts-ics": "^2.2.0"
