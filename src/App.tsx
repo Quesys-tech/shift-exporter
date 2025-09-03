@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { downloadIcs } from './Ics';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Badge from 'react-bootstrap/esm/Badge';
+import ListGroup from 'react-bootstrap/esm/ListGroup';
+import Stack from 'react-bootstrap/esm/Stack';
 
 
 const getDuration = (startTime: string, endTime: string) => {
@@ -54,74 +63,130 @@ const App: React.FC = () => {
   const sortedDates = selectedDates.sort((a, b) => a.getTime() - b.getTime());
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-      <h1 style={{ textAlign: 'center' }}>
-        Shift calendar exporter
-      </h1>
-      <label>
-        件名:
-        <input
-          type="text"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-        />
-      </label>
-      <label>
-        開始時間:
-        <input
-          type="time"
-          value={startTime}
-          onChange={handleStartTimeChange}
-        />
-      </label>
-      <label>
-        終了時間:
-        <input
-          type="time"
-          value={endTime}
-          onChange={handleEndTimeChange}
-        />
-      </label>
-      <p>
-        継続時間: {getDuration(startTime, endTime)}
-      </p>
-      <h2>日付を選択してください:</h2>
-      <DatePicker
-        inline
-        selected={null}
-        onChange={handleDateClick}
-        highlightDates={selectedDates}
-        dayClassName={(date) =>
-          selectedDates.some(
-            (selectedDate) => selectedDate.getTime() === date.getTime()
-          )
-            ? 'selected-date'
-            : ''
-        }
-      />
-      <div>
-        <h3>選択された日付:</h3>
-        <ul>
-          {sortedDates.map((date) => (
-            <li key={date.toISOString()}>{date.toLocaleDateString()} {startTime}-{endTime}</li>
-          ))}
-          {sortedDates.length === 0 && <li>選択された日付はありません</li>}
-        </ul>
-        <button onClick={resetSelectedDates}>リセット</button>
-      </div>
-      {selectedDates.length > 0 && (
-        <div>
-          <button
-            onClick={() => downloadIcs(subject, startTime, endTime, sortedDates, 'shifts_' + subject + '.ics')
-            }
-          >ICS形式でダウンロード</button>
-        </div>
-      )}
-      <footer>
-        <p>Shift calendar exporter by <a href="https://github.com/Quesys-tech">Queue-sys</a></p>
-        <p><a href="https://github.com/Quesys-tech/shift-exporter">Repository</a></p>
-      </footer>
-    </div>
+    <Container className="py-4">
+      <Row className="justify-content-center">
+        <Col md={8} lg={6}>
+          <h1 className="h3 mb-3 text-center">Shift calendar exporter</h1>
+          <Card className="shadow-sm">
+            <Card.Body>
+
+              <Form>
+                <Form.Group className="mb-3" controlId="subject">
+                  <Form.Label>件名</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    placeholder="アルバイト"
+                  />
+                </Form.Group>
+
+                <Row>
+                  <Col md={6} className="mb-3" controlId="startTime">
+                    <Form.Label>開始時間</Form.Label>
+                    <Form.Control
+                      type="time"
+                      value={startTime}
+                      onChange={handleStartTimeChange}
+                    />
+                  </Col>
+                  <Col md={6} className="mb-3" controlId="endTime">
+                    <Form.Label>終了時間</Form.Label>
+                    <Form.Control
+                      type="time"
+                      value={endTime}
+                      onChange={handleEndTimeChange}
+                    />
+                  </Col>
+                </Row>
+
+                <div className="mb-3">
+                  <Badge bg="secondary">
+                    継続時間: {getDuration(startTime, endTime)}
+                  </Badge>
+                </div>
+
+                <h2 className="h5 mt-3 mb-2">日付を選択してください:</h2>
+                <div className="border rounded p-2 mb-3">
+                  <DatePicker
+                    inline
+                    selected={null}
+                    onChange={handleDateClick}
+                    highlightDates={selectedDates}
+                    dayClassName={(date) =>
+                      selectedDates.some(
+                        (selectedDate) => selectedDate.getTime() === date.getTime()
+                      )
+                        ? 'selected-date'
+                        : ''
+                    }
+                  />
+                </div>
+
+                <Card className="mb-3">
+                  <Card.Header className="py-2">選択された日付</Card.Header>
+                  <ListGroup variant="flush">
+                    {sortedDates.length > 0 ? (
+                      sortedDates.map((date) => (
+                        <ListGroup.Item key={date.toISOString()} className="d-flex justify-content-between align-items-center">
+                          <span>
+                            {date.toLocaleDateString("ja-JP")} {startTime} - {endTime}
+                          </span>
+                        </ListGroup.Item>
+                      ))
+                    ) : (
+                      <ListGroup.Item>選択された日付はありません</ListGroup.Item>
+                    )}
+                  </ListGroup><Card.Footer>
+                    <Button variant="outline-secondary" size="sm" onClick={resetSelectedDates}>
+                      リセット
+                    </Button>
+                  </Card.Footer>
+                </Card>
+                <Stack direction="horizontal" gap={2} className="justify-content-end">
+                  <Button
+                    variant="primary"
+                    disabled={selectedDates.length === 0}
+                    onClick={() =>
+                      downloadIcs(
+                        subject,
+                        startTime,
+                        endTime,
+                        sortedDates,
+                        `shifts_${(subject || "シフト").trim()}.ics`
+                      )
+                    }
+                  >
+                    ICS形式でダウンロード
+                  </Button>
+                </Stack>
+              </Form>
+            </Card.Body>
+            <Card.Footer className="text-center small text-muted">
+              <div>
+                Shift calendar exporter by {" "}
+                <a href="https://github.com/Quesys-tech" target="_blank" rel="noreferrer">
+                  Queue-sys
+                </a>
+              </div>
+              <div>
+                <a href="https://github.com/Quesys-tech/shift-exporter" target="_blank" rel="noreferrer">
+                  Repository
+                </a>
+              </div>
+            </Card.Footer>
+          </Card>
+        </Col>
+      </Row>
+      {/* style for selected dates */}
+      <style>{`
+      .selected-date {
+      background: var(--bs-primary) !important;
+      color: #fff !important;
+      border-radius: 50% !important;
+      }
+      `}</style>
+    </Container>
   );
 };
 
