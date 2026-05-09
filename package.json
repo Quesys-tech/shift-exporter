@@ -37,11 +37,5 @@
     "typescript-eslint": "^8.59.1",
     "vite": "^8.0.10"
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad",
-  "pnpm": {
-    "overrides": {
-      "js-yaml": ">=4.1.1",
-      "glob@>=10.2.0 <10.5.0": ">=10.5.0"
-    }
-  }
+  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
 }
