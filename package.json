@@ -13,19 +13,19 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "filenamify": "^7.0.1",
-    "react": "^19.2.6",
+    "react": "^19.2.7",
     "react-bootstrap": "^2.10.10",
     "react-datepicker": "^9.1.0",
-    "react-dom": "^19.2.6",
+    "react-dom": "^19.2.7",
     "ts-ics": "^2.4.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
-    "@types/react": "^19.2.15",
+    "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
-    "eslint": "^10.4.0",
+    "eslint": "^10.4.1",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
@@ -34,8 +34,8 @@
     "stylelint-config-recommended": "^18.0.0",
     "ts-jest": "^29.4.11",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.59.4",
-    "vite": "^8.0.14"
+    "typescript-eslint": "^8.60.1",
+    "vite": "^8.0.16"
   },
   "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
 }
