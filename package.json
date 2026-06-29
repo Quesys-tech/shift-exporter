@@ -17,25 +17,25 @@
     "react-bootstrap": "^2.10.10",
     "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.7",
-    "ts-ics": "^2.4.5"
+    "ts-ics": "^2.4.6"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.2",
-    "eslint": "^10.5.0",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^10.6.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
-    "globals": "^17.6.0",
+    "globals": "^17.7.0",
     "jest": "^30.4.2",
-    "stylelint": "^17.13.0",
+    "stylelint": "^17.14.0",
     "stylelint-config-recommended": "^18.0.0",
     "ts-jest": "^29.4.11",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.61.1",
-    "vite": "^8.0.16"
+    "typescript-eslint": "^8.62.0",
+    "vite": "^8.1.0"
   },
   "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
 }
